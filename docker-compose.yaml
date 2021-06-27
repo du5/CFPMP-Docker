@@ -1,0 +1,25 @@
+version: '2'
+services:
+    nginx:
+        container_name: nginx
+        restart: always
+        image: nginx:alpine
+        ports:
+            - 80:80
+        depends_on:
+            - php
+        volumes: 
+            - ./CFPMP:/usr/www/html
+            - ./nginx:/etc/nginx/conf.d
+        environment: 
+            - TZ=Asia/Shanghai
+
+    php:
+        container_name: php
+        restart: always
+        image: gtary/php:ssp
+        volumes: 
+            - ./CFPMP:/var/www/html
+        environment: 
+            - TZ=Asia/Shanghai
+            
